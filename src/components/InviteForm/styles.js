@@ -1,5 +1,33 @@
 import styled from 'styled-components';
 
+const getPage = page => {
+    if (!page || page < 0 || !Number.isInteger(page)) return "0"
+    return `${page * -100}%`
+}
+
+const getHeight = page => {
+    switch (page) {
+        case 0:
+            return "200px";
+        case 1:
+            return "350px";
+        case 2:
+            return "200px";
+        default:
+            return "300px";
+    }
+}
+
+export const Controls = styled.div`
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+`;
+export const Button = styled.button`
+    opacity: ${props => props.hidden ? '0' : '1'};
+    transition: 0.1s ease;
+`;
+
 export const Title = styled.div`
     background-color: #2B2B2B;
     padding: 1rem 0;
@@ -7,16 +35,28 @@ export const Title = styled.div`
 `;
 
 export const Form = styled.div`
-    width: 470px;
+    width: 400px;
     background-color: white;
-    min-height: 300px;
     border-radius: 8px;
+    padding-bottom: 1.5rem;
     overflow: hidden;
+    transition: 1.4s ease;
+    position: relative;
 `;
 
-export const Content = styled.div`
+export const Step = styled.div`
     box-sizing: border-box;
     padding: 2rem 3rem;
+    min-width: 100%;
+`;
+
+export const DynamicHeight = styled.div`
+    height: ${props => props.height}px;
+    transition: 0.4s ease;
+`;
+
+export const Pages = styled.div`
+    display: flex;
 `;
 
 export const Label = styled.label`

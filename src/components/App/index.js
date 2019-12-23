@@ -1,13 +1,12 @@
 import React from 'react';
 
-import InviteForm from './components/InviteForm';
-import logo from './logo.svg';
-import './App.css';
+import Home from 'pages/home';
+import './global.css';
 
 function App() {
   return (
     <div className="App">
-      <InviteForm />
+      <Home />
     </div>
   );
 }
