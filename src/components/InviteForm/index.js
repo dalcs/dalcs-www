@@ -65,6 +65,11 @@ class InviteForm extends React.Component {
                     <Styled.Button cta onClick={this.increment}>Next</Styled.Button>
                   </Styled.Controls>
                 )}
+                <Styled.Indicator>
+                  {this.pages.map((_, idx) => (
+                    <Styled.Dot selected={idx === this.state.page} />
+                  ))}
+                </Styled.Indicator>
             </Styled.Form>
         )
     }

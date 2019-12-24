@@ -8,8 +8,7 @@ export const Controls = styled.div`
     box-sizing: border-box;
     padding: 0 3rem;
     width: 100%;
-    margin-bottom: 2.5rem;
-    margin-top: -1rem;
+    margin-bottom: 0.1rem;
 `;
 
 export const Button = styled.button`
@@ -56,6 +55,19 @@ export const Title = styled.div`
     color: white;
 `;
 
+export const Indicator = styled.div`
+  margin-bottom: 0.85rem;
+`;
+
+export const Dot = styled.div`
+  height: 6px;
+  width: 6px;
+  margin: 0 3px;
+  background-color: ${props => props.selected ? '#498AFF' : '#ddd'};
+  border-radius: 50%;
+  display: inline-block;
+`;
+
 export const Form = styled.div`
     width: 400px;
     background-color: white;
@@ -65,13 +77,16 @@ export const Form = styled.div`
     position: relative;
 
     &:hover {
-      box-shadow: 0 6px 28px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.1);
     }
 `;
 
 export const Step = styled.div`
     box-sizing: border-box;
-    padding: 2rem 3rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     min-width: 100%;
 `;
 

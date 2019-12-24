@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Confetti from 'react-confetti'
 import { CSSTransition } from 'react-transition-group';
 
 import * as Styled from '../styles';
@@ -26,18 +26,19 @@ class Success extends React.Component {
     }
   
     render() {
-        return (
-          <CSSTransition in={true} timeout={500} classNames="step">
-            <Styled.Step ref={(component) => { this.component = component }}>
-              <Title>You’ve been invited to dalcs</Title>
-              <Instructions>
-                Check your email or follow the link below
-                to accept your invitation
-              </Instructions>
-              <Styled.Button cta>Verify</Styled.Button>
-            </Styled.Step>
-          </CSSTransition>
-        )
+      return (
+        <CSSTransition in={true} timeout={500} classNames="step">
+          <Styled.Step ref={(component) => { this.component = component }}>
+            <Confetti />
+            <Title><span role="img" aria-label="tada">🎉</span> You’ve been invited to dalcs</Title>
+            <Instructions>
+              Check your email or follow the link below
+              to accept your invitation
+            </Instructions>
+            <Styled.Button cta>Verify</Styled.Button>
+          </Styled.Step>
+        </CSSTransition>
+      )
     }
   }
 

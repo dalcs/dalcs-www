@@ -15,7 +15,7 @@ class Code extends React.Component {
           <CSSTransition in={true} timeout={500} classNames="step">
             <Styled.Step ref={(component) => { this.component = component }}>
                 <Styled.Label>
-                    Invite Code:
+                    Verification code:
                     <Styled.Input type="text" placeholder="123456" />
                 </Styled.Label>
             </Styled.Step>

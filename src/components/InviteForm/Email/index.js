@@ -15,7 +15,7 @@ class Email extends React.Component {
           <CSSTransition in={true} timeout={500} classNames="step">
             <Styled.Step ref={(component) => { this.component = component }}>
                 <Styled.Label>
-                    Enter your email:
+                    Enter your dal email:
                     <Styled.Input type="text" placeholder="sarah@dal.ca" />
                 </Styled.Label>
             </Styled.Step>

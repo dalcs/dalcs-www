@@ -13,4 +13,5 @@
 #sky {
   z-index: 0 !important;
   height: 100vh;
+  user-select: none;
 }
