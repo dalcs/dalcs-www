@@ -8,17 +8,32 @@ import * as Styled from './styles';
 
 class InviteForm extends React.Component {
     state = {
-        page: 0
+      page: 0,
+      content: {
+        email: "",
+        code: "",
+        githubToken: ""
+      },
+      currentStepValid: false,
+      title: "",
     }
 
     increment = () => {
-        if (this.state.page >= this.pages.length-1) return
-        this.setState((state) => ({page: state.page+1}))
+      if (this.state.page >= this.pages.length-1) return
+      this.setState((state) => ({ page: state.page+1 }))
     }
 
-    decrement = () => {
-        if (this.state.page === 0) return
-        this.setState((state) => ({page: state.page-1}))
+    cancel = () => {
+      this.setState({
+        page: 0,
+        content: {
+          email: "",
+          code: "",
+          githubToken: ""
+        },
+        currentStepValid: false,
+        title: "",
+      })
     }
 
     // This is used for the children to report their height to us
@@ -26,34 +41,41 @@ class InviteForm extends React.Component {
         this.setState({innerHeight: height});
     }
 
-    pages = [
-        {
-            title: "Join @dalcs on github",
-            component: Email,
-        },
-        {
-            title: "Enter the code sent to mack@dal.ca",
-            component: Code,
-        },
-        {
-          title: "Connect your Github",
-          component: Github,
-        },
-        {
-          title: "Invitation sent to @mack",
-          component: Success,
-        }
-    ]
+    pages = [Email, Code, Github, Success]
 
     renderStep = props => {
-      const ComponentType = this.pages[this.state.page].component
-      return <ComponentType reportHeight={this.reportHeight} {...props} />
+      // Read that this was important to leave as a capital
+      const ComponentType = this.pages[this.state.page]
+
+      const componentName = ComponentType.getName()
+      return (
+        <ComponentType
+          reportHeight={this.reportHeight}
+          content={this.state.content}
+          updateContent={this.updateContent(componentName)}
+          validateStep={this.validateStep}
+          setTitle={this.setTitle}
+          {...props}
+        />
+      );
+    }
+
+    validateStep = (isValid) => {
+      this.setState({currentStepValid: isValid})
+    }
+
+    setTitle = (title) => {
+      this.setState({title})
+    }
+
+    updateContent = step => content => {
+      this.setState(state => state.content[step] = content)
     }
 
     render() {
         return (
             <Styled.Form>
-                <Styled.Title>{this.pages[this.state.page].title}</Styled.Title>
+                <Styled.Title>{this.state.title}</Styled.Title>
                 <Styled.DynamicHeight height={this.state.innerHeight}>
                     <Styled.Pages>
                       {this.renderStep()}
@@ -61,8 +83,14 @@ class InviteForm extends React.Component {
                 </Styled.DynamicHeight>
                 {this.state.page < this.pages.length - 1 && (
                   <Styled.Controls>
-                    <Styled.Button onClick={this.decrement} hide={this.state.page === 0}>Back</Styled.Button>
-                    <Styled.Button cta onClick={this.increment}>Next</Styled.Button>
+                    <Styled.Button onClick={this.cancel} hide={this.state.page === 0}>Cancel</Styled.Button>
+                    <Styled.Button
+                      disabled={!this.state.currentStepValid}
+                      cta
+                      onClick={this.increment}
+                    >
+                      Next
+                    </Styled.Button>
                   </Styled.Controls>
                 )}
                 <Styled.Indicator>

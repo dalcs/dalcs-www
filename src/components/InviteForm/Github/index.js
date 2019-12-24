@@ -28,8 +28,14 @@ class Github extends React.Component {
     componentDidMount() {
         const height = this.component.clientHeight;
         this.props.reportHeight(height);
+
+        this.props.setTitle(`Connect your Github`)
     }
   
+    static getName() {
+      return "code";
+    }
+
     render() {
         return (
           <CSSTransition in={true} timeout={500} classNames="step">

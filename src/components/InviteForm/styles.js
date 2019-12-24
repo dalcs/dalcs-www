@@ -35,7 +35,7 @@ export const Button = styled.button`
     display: ${props => props.cta ? 'block' : 'none'};
     content: "";
     position: absolute;
-    background: ${props => !props.valid ? '#2B2B2B' : '#FF4949'};
+    background: ${props => !props.disabled ? '#2B2B2B' : '#FF4949'};
     bottom: 0;
     left: 0;
     transition: 0.2s ease;

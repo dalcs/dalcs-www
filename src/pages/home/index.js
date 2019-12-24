@@ -15,9 +15,9 @@ export default () => (
             3: "background/smallblue.svg",
             4: "background/smalloutline.svg",
           }}
-          how={10}
+          how={6}
           time={40}
-          size={'600px'}
+          size={'400px'}
         />
       <div>
         <Styled.HeaderContainer>
