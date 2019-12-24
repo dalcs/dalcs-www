@@ -22,11 +22,11 @@ export const Button = styled.button`
   font-size: 14px;
   font-weight: 500;
   border-radius: 4px;
-  padding: 0.5rem 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-right: 1rem;
   padding-left: ${props => props.cta ? '1rem' : '0'};
+  transform: ${props => props.big ? 'scale(1.1)' : 'scale(1)'};
   cursor: pointer;
   border: none;
   outline: none;
