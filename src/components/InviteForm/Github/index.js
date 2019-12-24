@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { IoLogoGithub } from 'react-icons/io';
+
 import { CSSTransition } from 'react-transition-group';
 
 import * as Styled from '../styles';
@@ -17,6 +19,11 @@ const GithubBtn = styled.button`
   width: 100%;
   cursor: pointer;
   transition: .1s ease;
+
+  & > svg {
+    margin-right: 0.3rem;
+    transform: translateY(2px);
+  }
 
   &:active {
     border: 1px solid #AEAEAE;
@@ -41,7 +48,7 @@ class Github extends React.Component {
           <CSSTransition in={true} timeout={500} classNames="step">
             <Styled.Step ref={(component) => { this.component = component }}>
                 <Styled.Label>
-                    <GithubBtn>Sign in with Github</GithubBtn>
+                    <GithubBtn><IoLogoGithub />Sign in with Github</GithubBtn>
                 </Styled.Label>
             </Styled.Step>
           </CSSTransition>

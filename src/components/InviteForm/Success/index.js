@@ -43,7 +43,7 @@ class Success extends React.Component {
               to accept your invitation
             </Instructions>
             <a href="https://github.com/dalcs" target="_blank" rel="noopener noreferrer">
-              <Styled.Button cta big>
+              <Styled.Button cta big valid>
                 Accept Invite
               </Styled.Button>
             </a>

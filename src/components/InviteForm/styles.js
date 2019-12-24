@@ -15,6 +15,7 @@ export const Button = styled.button`
   position: relative;
   z-index: 1;
   opacity: ${props => props.hide ? '0' : '1'};
+  visibility: ${props => props.hide ? 'hidden' : 'visible'};
   overflow: hidden;
   transition: 0.1s ease;
   background-color: ${props => props.cta ? '#498AFF' : 'inherit'};
@@ -27,7 +28,7 @@ export const Button = styled.button`
   padding-right: 1rem;
   padding-left: ${props => props.cta ? '1rem' : '0'};
   transform: ${props => props.big ? 'scale(1.1)' : 'scale(1)'};
-  cursor: pointer;
+  cursor: ${props => props.invalid ? 'not-allowed' : 'pointer'};
   border: none;
   outline: none;
 
@@ -35,7 +36,7 @@ export const Button = styled.button`
     display: ${props => props.cta ? 'block' : 'none'};
     content: "";
     position: absolute;
-    background: ${props => !props.disabled ? '#2B2B2B' : '#FF4949'};
+    background: #2B2B2B;
     bottom: 0;
     left: 0;
     transition: 0.2s ease;

@@ -19,7 +19,7 @@ class InviteForm extends React.Component {
     }
 
     increment = () => {
-      if (this.state.page >= this.pages.length-1) return
+      if (this.state.page >= this.pages.length-1 || !this.state.currentStepValid) return
       this.setState((state) => ({ page: state.page+1 }))
     }
 
@@ -85,7 +85,7 @@ class InviteForm extends React.Component {
                   <Styled.Controls>
                     <Styled.Button onClick={this.cancel} hide={this.state.page === 0}>Cancel</Styled.Button>
                     <Styled.Button
-                      disabled={!this.state.currentStepValid}
+                      invalid={!this.state.currentStepValid}
                       cta
                       onClick={this.increment}
                     >
