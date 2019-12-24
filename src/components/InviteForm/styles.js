@@ -120,6 +120,7 @@ export const Pages = styled(TransitionGroup)`
 `;
 
 export const Label = styled.label`
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

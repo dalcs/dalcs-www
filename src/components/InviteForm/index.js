@@ -55,6 +55,7 @@ class InviteForm extends React.Component {
           updateContent={this.updateContent(componentName)}
           validateStep={this.validateStep}
           setTitle={this.setTitle}
+          submit={this.increment}
           {...props}
         />
       );

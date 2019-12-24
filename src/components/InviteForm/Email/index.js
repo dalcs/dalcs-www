@@ -12,7 +12,8 @@ class Email extends React.Component {
         this.props.reportHeight(height);
         this.props.validateStep(false);
 
-        this.props.setTitle(`Join @dalcs on Github`)
+        this.props.setTitle(`Join @dalcs on Github`);
+        this.focalInput.focus(); 
     }
 
     static getName() {
@@ -30,6 +31,12 @@ class Email extends React.Component {
       this.checkValidity(value);
       this.props.updateContent(value);
     }
+
+    submit = (e) => {
+      if (e.key === 'Enter') {
+        this.props.submit();
+      }
+    }
   
     render() {
         return (
@@ -38,9 +45,11 @@ class Email extends React.Component {
                 <Styled.Label>
                     Enter your dal email:
                     <Styled.Input
+                      ref={(input) => { this.focalInput = input; }} 
                       type="text"
                       value={this.props.content[this.constructor.getName()] || ""}
                       onChange={this.updateContent}
+                      onKeyDown={this.submit}
                       placeholder="sarah@dal.ca"
                     />
                 </Styled.Label>
