@@ -1,11 +1,24 @@
 import React from 'react';
 
 import InviteForm from 'components/InviteForm';
+import Sky from 'react-sky';
 
 import * as Styled from './styles';
 
 export default () => (
     <Styled.Homepage>
+        <Sky
+          images={{
+            0: "background/bigblue.svg",
+            1: "background/giantoutline.svg",
+            2: "background/medoutline.svg",
+            3: "background/smallblue.svg",
+            4: "background/smalloutline.svg",
+          }}
+          how={10}
+          time={40}
+          size={'600px'}
+        />
       <div>
         <Styled.HeaderContainer>
           <Styled.Header>
@@ -13,7 +26,7 @@ export default () => (
               <Styled.Title>Dalhousie Computer Science</Styled.Title>
               <Styled.Tagline>
                   Become a part of the unofficial dalhousie computer science
-                  github organization
+                  Github organization
               </Styled.Tagline>
           </Styled.Header>
         </Styled.HeaderContainer>

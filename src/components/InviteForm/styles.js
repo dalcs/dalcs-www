@@ -3,19 +3,22 @@ import styled from 'styled-components';
 import { TransitionGroup } from 'react-transition-group';
 
 export const Controls = styled.div`
-    position: absolute;
     display: flex;
     justify-content: space-between;
-    bottom: 2rem;
     box-sizing: border-box;
     padding: 0 3rem;
     width: 100%;
+    margin-bottom: 2.5rem;
+    margin-top: -1rem;
 `;
-export const Button = styled.button`
-  opacity: ${props => props.hide ? '0' : '1'};
-  transition: 0.1s ease;
 
-  background-color: ${props => props.cta ? '#5E71FB' : 'inherit'};
+export const Button = styled.button`
+  position: relative;
+  z-index: 1;
+  opacity: ${props => props.hide ? '0' : '1'};
+  overflow: hidden;
+  transition: 0.1s ease;
+  background-color: ${props => props.cta ? '#498AFF' : 'inherit'};
   color: ${props => props.cta ? 'white' : '#2B2B2B'};
   font-size: 14px;
   font-weight: 500;
@@ -28,6 +31,23 @@ export const Button = styled.button`
   cursor: pointer;
   border: none;
   outline: none;
+
+  &:before {
+    display: ${props => props.cta ? 'block' : 'none'};
+    content: "";
+    position: absolute;
+    background: ${props => !props.valid ? '#2B2B2B' : '#FF4949'};
+    bottom: 0;
+    left: 0;
+    transition: 0.2s ease;
+    right: 0;
+    top: 100%;
+    z-index: -1;
+  }
+  
+  &:hover:before {
+    top: 0;
+  }
 `;
 
 export const Title = styled.div`
@@ -40,10 +60,13 @@ export const Form = styled.div`
     width: 400px;
     background-color: white;
     border-radius: 8px;
-    padding-bottom: 3.5rem;
     overflow: hidden;
     transition: 1.4s ease;
     position: relative;
+
+    &:hover {
+      box-shadow: 0 6px 28px rgba(0,0,0,0.15);
+    }
 `;
 
 export const Step = styled.div`
@@ -95,7 +118,8 @@ export const Input = styled.input`
     border: 1px solid #CCCCCC;
     font-size: 18px;
     border-radius: 5px;
-    margin-top: 5px;
+    margin-top: 8px;
+    color: #2B2B2B;
 
     &:focus {
         outline: none;

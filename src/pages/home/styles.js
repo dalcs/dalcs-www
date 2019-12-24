@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Page from 'components/Page';
 
 export const Title = styled.h1`
   font-weight: 400;
@@ -40,10 +39,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Homepage = styled.div`
-  background-image: url('background.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;

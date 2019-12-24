@@ -15,10 +15,8 @@ class Code extends React.Component {
           <CSSTransition in={true} timeout={500} classNames="step">
             <Styled.Step ref={(component) => { this.component = component }}>
                 <Styled.Label>
-                    Enter your email:
-                    <Styled.Input type="text" placeholder="sarah@dal.ca" />
-                    Enter your email:
-                    <Styled.Input type="text" placeholder="sarah@dal.ca" />
+                    Invite Code:
+                    <Styled.Input type="text" placeholder="123456" />
                 </Styled.Label>
             </Styled.Step>
           </CSSTransition>

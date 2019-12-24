@@ -59,10 +59,12 @@ class InviteForm extends React.Component {
                       {this.renderStep()}
                     </Styled.Pages>
                 </Styled.DynamicHeight>
-                <Styled.Controls>
+                {this.state.page < this.pages.length - 1 && (
+                  <Styled.Controls>
                     <Styled.Button onClick={this.decrement} hide={this.state.page === 0}>Back</Styled.Button>
                     <Styled.Button cta onClick={this.increment}>Next</Styled.Button>
-                </Styled.Controls>
+                  </Styled.Controls>
+                )}
             </Styled.Form>
         )
     }
