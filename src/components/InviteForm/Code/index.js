@@ -32,7 +32,7 @@ class Code extends React.Component {
     this.props.reportHeight(height);
     this.props.validateStep(false);
 
-    this.props.setTitle(`Enter the code sent to ${this.props.content["email"]}`)
+    this.props.setTitle(<span>Enter the code sent to <b>{this.props.content["email"]}</b></span>)
     this.focalInput.focus(); 
   }
 
@@ -58,12 +58,6 @@ class Code extends React.Component {
     this.props.updateContent(value);
   }
 
-  submit = (e) => {
-    if (e.key === 'Enter') {
-      this.props.submit();
-    }
-  }
-
   render() {
       return (
         <CSSTransition in={true} timeout={500} classNames="step">
@@ -76,7 +70,6 @@ class Code extends React.Component {
                       type="text"
                       value={this.props.content[this.constructor.getName()] || ""}
                       onChange={this.updateContent}
-                      onKeyDown={this.submit}
                       placeholder="123456"
                     />
                     {this.state.successBadge && <Check src="check.svg" />}

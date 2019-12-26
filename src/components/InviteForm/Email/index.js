@@ -31,12 +31,6 @@ class Email extends React.Component {
       this.checkValidity(value);
       this.props.updateContent(value);
     }
-
-    submit = (e) => {
-      if (e.key === 'Enter') {
-        this.props.submit();
-      }
-    }
   
     render() {
         return (
@@ -49,7 +43,6 @@ class Email extends React.Component {
                       type="text"
                       value={this.props.content[this.constructor.getName()] || ""}
                       onChange={this.updateContent}
-                      onKeyDown={this.submit}
                       placeholder="sarah@dal.ca"
                     />
                 </Styled.Label>

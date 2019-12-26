@@ -24,7 +24,7 @@ class Success extends React.Component {
         const height = this.component.clientHeight;
         this.props.reportHeight(height);
 
-        this.props.setTitle(`Invitation sent to @mack`)
+        this.props.setTitle(<span>Invitation sent to <b>@mack</b></span>)
     }
 
     static getName() {

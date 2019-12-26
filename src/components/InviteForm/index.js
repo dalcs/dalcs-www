@@ -18,8 +18,16 @@ class InviteForm extends React.Component {
       title: "",
     }
 
-    increment = () => {
-      if (this.state.page >= this.pages.length-1 || !this.state.currentStepValid) return
+    componentDidMount() {
+      document.addEventListener("keydown", this.shortcuts);
+    }
+
+    componentWillUnmount() {
+      document.removeEventListener("keydown", this.shortcuts);
+    }
+
+    next = () => {
+      if (this.state.page >= this.pages.length - 1 || !this.state.currentStepValid) return
       this.setState((state) => ({ page: state.page+1 }))
     }
 
@@ -55,7 +63,6 @@ class InviteForm extends React.Component {
           updateContent={this.updateContent(componentName)}
           validateStep={this.validateStep}
           setTitle={this.setTitle}
-          submit={this.increment}
           {...props}
         />
       );
@@ -73,6 +80,13 @@ class InviteForm extends React.Component {
       this.setState(state => state.content[step] = content)
     }
 
+    shortcuts = (e) => {
+      // Shortcut so people don't have to click button
+      if (e.key === 'Enter') {
+        this.next();
+      }
+    }
+
     render() {
         return (
             <Styled.Form>
@@ -88,7 +102,7 @@ class InviteForm extends React.Component {
                     <Styled.Button
                       invalid={!this.state.currentStepValid}
                       cta
-                      onClick={this.increment}
+                      onClick={this.next}
                     >
                       Next
                     </Styled.Button>
