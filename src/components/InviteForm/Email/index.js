@@ -10,7 +10,7 @@ class Email extends React.Component {
     componentDidMount() {
         const height = this.component.clientHeight;
         this.props.reportHeight(height);
-        this.props.validateStep(false);
+        this.props.setValidateFn(this.validate);
 
         this.props.setTitle(`Join @dalcs on Github`);
         this.focalInput.focus(); 
@@ -20,15 +20,19 @@ class Email extends React.Component {
       return "email";
     }
 
-    checkValidity = (value) => {
+    validate = (v) => {
+      const value = v || this.props.content[this.constructor.getName()];
       const re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@dal\.ca$/
       const isEmail = value.match(re) ? true : false;
-      this.props.validateStep(isEmail);
+      if (isEmail) 
+        return null;
+      else
+        return "Please enter a valid @dal.ca email."
     }
 
     updateContent = (e) => {
       const { value } = e.target;
-      this.checkValidity(value);
+      this.validate(value);
       this.props.updateContent(value);
     }
   

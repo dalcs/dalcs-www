@@ -11,14 +11,21 @@ class InviteForm extends React.Component {
       page: 0,
       content: {
         email: "",
-        code: "",
-        githubToken: ""
+        code: {
+          value: "",
+          isValid: false,
+        },
+        github: ""
       },
-      currentStepValid: false,
+      // validate() returns null if no errors found, otherwise an error message
+      validate: () => null,
+      showError: false,
       title: "",
     }
 
     componentDidMount() {
+      // Deep copy of object with json
+      this.initialState = JSON.parse(JSON.stringify(this.state));
       document.addEventListener("keydown", this.shortcuts);
     }
 
@@ -27,21 +34,28 @@ class InviteForm extends React.Component {
     }
 
     next = () => {
-      if (this.state.page >= this.pages.length - 1 || !this.state.currentStepValid) return
-      this.setState((state) => ({ page: state.page+1 }))
+      if (this.state.page >= this.pages.length - 1) {
+        return
+      } else if (this.validate()) { 
+        return
+      }
+      this.setState((state) => ({ page: state.page + 1 }))
     }
 
     cancel = () => {
-      this.setState({
-        page: 0,
-        content: {
-          email: "",
-          code: "",
-          githubToken: ""
-        },
-        currentStepValid: false,
-        title: "",
-      })
+      // Deep copy of object with json
+      const initialState = JSON.parse(JSON.stringify(this.initialState));
+      this.setState(initialState);
+    }
+
+    validate = () => {
+      const v = this.state.validate();
+      if (v) {
+        this.setState({ showError: true })
+      } else {
+        this.setState({ showError: false })
+      }
+      return v;
     }
 
     // This is used for the children to report their height to us
@@ -61,15 +75,15 @@ class InviteForm extends React.Component {
           reportHeight={this.reportHeight}
           content={this.state.content}
           updateContent={this.updateContent(componentName)}
-          validateStep={this.validateStep}
           setTitle={this.setTitle}
+          setValidateFn={this.setValidateFn}
           {...props}
         />
       );
     }
 
-    validateStep = (isValid) => {
-      this.setState({currentStepValid: isValid})
+    setValidateFn = (fn) => {
+      this.setState({validate: fn});
     }
 
     setTitle = (title) => {
@@ -88,34 +102,37 @@ class InviteForm extends React.Component {
     }
 
     render() {
-        return (
-            <Styled.Form>
-                <Styled.Title>{this.state.title}</Styled.Title>
-                <Styled.DynamicHeight height={this.state.innerHeight}>
-                    <Styled.Pages>
-                      {this.renderStep()}
-                    </Styled.Pages>
-                </Styled.DynamicHeight>
-                {this.state.page < this.pages.length - 1 && (
-                  <Styled.Controls>
-                    <Styled.Button onClick={this.cancel} hide={this.state.page === 0}>Cancel</Styled.Button>
-                    <Styled.Button
-                      invalid={!this.state.currentStepValid}
-                      cta
-                      onClick={this.next}
-                    >
-                      Next
-                    </Styled.Button>
-                  </Styled.Controls>
-                )}
-                <Styled.Indicator>
-                  {this.pages.map((_, idx) => (
-                    <Styled.Dot selected={idx === this.state.page} />
-                  ))}
-                </Styled.Indicator>
-            </Styled.Form>
-        )
-    }
+      const errorMsg = this.state.showError ? this.state.validate() : null;
+
+      return (
+          <Styled.Form>
+              <Styled.Title>{this.state.title}</Styled.Title>
+              <Styled.DynamicHeight height={this.state.innerHeight}>
+                  <Styled.Pages>
+                    {this.renderStep()}
+                  </Styled.Pages>
+              </Styled.DynamicHeight>
+              {errorMsg && <Styled.Error>{errorMsg}</Styled.Error>}
+              {this.state.page < this.pages.length - 1 && (
+                <Styled.Controls>
+                  <Styled.Button onClick={this.cancel} hide={this.state.page === 0}>Cancel</Styled.Button>
+                  <Styled.Button
+                    invalid={this.state.validate()}
+                    cta
+                    onClick={this.next}
+                  >
+                    Next
+                  </Styled.Button>
+                </Styled.Controls>
+              )}
+              <Styled.Indicator>
+                {this.pages.map((_, idx) => (
+                  <Styled.Dot selected={idx === this.state.page} />
+                ))}
+              </Styled.Indicator>
+          </Styled.Form>
+      )
+  }
 }
 
 export default InviteForm

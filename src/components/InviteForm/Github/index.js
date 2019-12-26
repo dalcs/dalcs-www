@@ -32,28 +32,40 @@ const GithubBtn = styled.button`
 `;
 
 class Github extends React.Component {
-    componentDidMount() {
-        const height = this.component.clientHeight;
-        this.props.reportHeight(height);
+  componentDidMount() {
+      const height = this.component.clientHeight;
+      this.props.reportHeight(height);
+      this.props.setValidateFn(this.validate);
 
-        this.props.setTitle(`Connect your Github`)
-    }
-  
-    static getName() {
-      return "code";
-    }
-
-    render() {
-        return (
-          <CSSTransition in={true} timeout={500} classNames="step">
-            <Styled.Step ref={(component) => { this.component = component }}>
-                <Styled.Label>
-                    <GithubBtn><IoLogoGithub />Sign in with Github</GithubBtn>
-                </Styled.Label>
-            </Styled.Step>
-          </CSSTransition>
-        )
-    }
+      this.props.setTitle(`Connect your Github`)
   }
+
+  static getName() {
+    return "github";
+  }
+
+  validate = (v) => {
+    if (v) 
+      return null;
+    else
+      return "You must link your github to join."
+  }
+
+  updateContent = () => {
+    this.props.updateContent("github-user-123")
+  }
+
+  render() {
+      return (
+        <CSSTransition in={true} timeout={500} classNames="step">
+          <Styled.Step ref={(component) => { this.component = component }}>
+              <Styled.Label>
+                  <GithubBtn onClick={() => this.updateContent()}><IoLogoGithub />Sign in with Github</GithubBtn>
+              </Styled.Label>
+          </Styled.Step>
+        </CSSTransition>
+      )
+  }
+}
 
 export default Github

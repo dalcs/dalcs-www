@@ -30,7 +30,7 @@ class Code extends React.Component {
   componentDidMount() {
     const height = this.component.clientHeight;
     this.props.reportHeight(height);
-    this.props.validateStep(false);
+    this.props.setValidateFn(this.validate);
 
     this.props.setTitle(<span>Enter the code sent to <b>{this.props.content["email"]}</b></span>)
     this.focalInput.focus(); 
@@ -40,22 +40,34 @@ class Code extends React.Component {
     return "code";
   }
 
-  validate = (value) => {
+  validate = (v) => {
+    const value = v || this.props.content[this.constructor.getName()].value
+    const isLength = value.length !== 6;
+    // TODO: Change this to actually verify code before proceeding
+    // this.setState({successBadge: value.length >= 6});
+    // this.props.validateStep(value.length >= 6);
+    if (isLength) 
+      return "Please enter the 6 digit code.";
+    else
+      return null
+  }
+
+  canInput = (v) => {
+    const value = v;
     const re = new RegExp(`^[0-9]{1,${CODE_LENGTH}}$`);
     const isNumber = value.match(re);
     const isEmpty = value === ""
-    const isValid = isNumber || isEmpty ? true : false;
-
-    // TODO: Change this to actually verify code before proceeding
-    this.setState({successBadge: value.length >= 6});
-    this.props.validateStep(value.length >= 6);
-    return isValid;
+    const canInput = isNumber || isEmpty ? true : false;
+    return canInput;
   }
 
   updateContent = (e) => {
     const { value } = e.target;
-    if (!this.validate(value)) return;
-    this.props.updateContent(value);
+    if (!this.canInput(value)) return;
+    this.props.updateContent({
+      value: value,
+      isValid: !this.validate(value),
+    });
   }
 
   render() {
@@ -68,11 +80,11 @@ class Code extends React.Component {
                     <Styled.Input
                       ref={(input) => { this.focalInput = input; }} 
                       type="text"
-                      value={this.props.content[this.constructor.getName()] || ""}
+                      value={this.props.content[this.constructor.getName()].value || ""}
                       onChange={this.updateContent}
                       placeholder="123456"
                     />
-                    {this.state.successBadge && <Check src="check.svg" />}
+                    {this.props.content[this.constructor.getName()].isValid && <Check src="check.svg" />}
                   </Control>
               </Styled.Label>
           </Styled.Step>

@@ -28,16 +28,15 @@ class Success extends React.Component {
     }
 
     static getName() {
-      return "code";
+      return "success";
     }
 
-  
     render() {
       return (
         <CSSTransition in={true} timeout={500} classNames="step">
           <Styled.Step ref={(component) => { this.component = component }}>
             <Confetti numberOfPieces={300} recycle={false} />
-            <Title><span role="img" aria-label="tada">🎉</span> You’ve been invited to dalcs</Title>
+            <Title><span role="img" aria-label="tada">🎉</span> You’ve been invited to dalcs!</Title>
             <Instructions>
               Check your email or follow the link below
               to accept your invitation

@@ -119,6 +119,12 @@ export const Pages = styled(TransitionGroup)`
     }
 `;
 
+export const Error = styled.div`
+  color: #ff3838;
+  font-size: 13px;
+  margin-bottom: 0.75rem;
+`;
+
 export const Label = styled.label`
     position: relative;
     display: flex;
