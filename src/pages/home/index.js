@@ -1,7 +1,7 @@
 import React from 'react';
 
 import InviteForm from 'components/InviteForm';
-import Sky from 'react-sky';
+import Sky from 'components/Sky';
 
 import * as Styled from './styles';
 
