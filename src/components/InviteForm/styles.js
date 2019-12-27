@@ -8,7 +8,6 @@ export const Controls = styled.div`
     box-sizing: border-box;
     padding: 0 3rem;
     width: 100%;
-    margin-bottom: 0.1rem;
 `;
 
 export const Button = styled.button`

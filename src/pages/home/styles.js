@@ -19,7 +19,8 @@ export const Tagline = styled.p`
 `;
 
 export const Logo = styled.img`
-  align-self: center;
+  width: 240px;
+  font-size: 16px;
 `;
 
 export const Header = styled.header`
